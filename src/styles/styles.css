@@ -1,20 +1,4 @@
-.flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-}
-
-.main {
-    height: 100%;
-    overflow-y: scroll;
-    background-color: rgb(50, 164, 240);
-}
-
-.navbar {
-    background-color: rgb(233, 67, 67);
-}
-
-.footer {
-    background-color: rgb(233, 67, 67);
-}
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

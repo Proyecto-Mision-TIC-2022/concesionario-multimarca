@@ -29,17 +29,17 @@ function App() {
             </Switch>
           </PrivateLayout>
         </Route>
-        <Route path={["/login","/registro"]}>
+        <Route path={["/login", "/registro"]}>
           <AuthLayout>
             <Switch>
               <Route path="/login">
                 <Login />
               </Route>
-              <Route path="/registro">
+              <Route path="/registro">  
                 <Registro />
               </Route>
             </Switch>
-          </AuthLayout> 
+          </AuthLayout>
         </Route>
         <Route path={["/"]}>
           <PublicLayout>

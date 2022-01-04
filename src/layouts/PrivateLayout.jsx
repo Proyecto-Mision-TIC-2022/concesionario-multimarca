@@ -1,11 +1,12 @@
-import Sidebar from "../components/Sidebar";
 import React from 'react';
+import Sidebar from "../components/Sidebar";
+
 
 const PrivateLayout = ({children}) => {
     return (
-        <div>
+        <div className="flex-sidebar">
             <Sidebar />
-            {children}
+            <main className="flex-main">{children}</main>
         </div>
     )
 };
