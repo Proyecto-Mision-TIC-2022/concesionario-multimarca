@@ -4,9 +4,9 @@ import PublicLayout from "../src/layouts/PublicLayout";
 import Admin from "../src/pages/admin/Index";
 import Clientes from "../src/pages/admin/Clientes";
 import Vehiculos from "../src/pages/admin/Vehiculos";
-import Index from "../src/pages/Index";
-import Login from "../src/pages/Login";
-import Registro from "../src/pages/Registro";
+import Index from "./pages/auth/Index";
+import Login from "./pages/auth/Login";
+import Registro from "./pages/auth/Registro";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../src/styles/styles.css";
 

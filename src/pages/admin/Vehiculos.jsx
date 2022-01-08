@@ -1,149 +1,51 @@
 import React, { useEffect, useState } from 'react';
 
-//realizar un formulario que le pida al usuario su edad y muestre un mensaje
-//que diga si el usuario es mayor de edad o no
-
-const vehiculosBackend = [
-  {
-    nombre: "Corolla",
-    marca: "Toyota",
-    modelo: 2014,
-  },
-  {
-    nombre: "Sandero",
-    marca: "Renault",
-    modelo: 2020,
-  },
-  {
-    nombre: "Rav4",
-    marca: "Toyota",
-    modelo: 2021,
-  },
-  {
-    nombre: "Fiesta",
-    marca: "Ford",
-    modelo: 2017,
-  },
-  {
-    nombre: "Mazda 3",
-    marca: "Mazda",
-    modelo: 2020,
-  },
-  {
-    nombre: "Chevrolet 3",
-    marca: "Onix",
-    modelo: 2020,
-  },
-];
-
 const Vehiculos = () => {
-  const [mostrarTabla, setMostrarTabla] = useState(true);
-  const [vehiculos, setVehiculos] = useState([]);
-  const [textoBoton, setTextBoton] = useState("Crear un nuevo vehículo");
+  const [nombreVehiculo , setNombreVehiculo] = useState("");
   
   useEffect(() => {
-    //obtener lista de vehículos desde el backend
-    setVehiculos(vehiculosBackend)
-  }, []);
+    console.log(
+      "Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza porque tiene el array de dependencias vacío"
+    );
+    //paso 2
+    //paso 3
+    //paso 4
+  },[]);   //una función que se ejecuta al inicio de la renderización del código
 
   useEffect(() => {
-    if (mostrarTabla) {
-      setTextBoton("Crear Nuevo Vehículo");
-    } else {
-      setTextBoton("Mostrar Todos los vehiculos");
-    }
-  }, [mostrarTabla]);
-  return (
-    <div>
-      <h2>Página de administración de vehículos</h2>
-      <button 
-        onClick={()=>
-          {setMostrarTabla(!mostrarTabla);
-          }}
-        className="buton-vehiculo"
-      >
-        {textoBoton}
-        </button>
-      {mostrarTabla ? (
-        <TablaVehiculos listaVehiculos={vehiculos} /> 
-      ): <FormularioCreacionVehiculos />}
-    </div>
-  );
-};
+    console.log("Esto es una funcion que se ejecuta cada que cambia el valor de nombrevehiculo");
+    console.log("el valor de la variable es ", nombreVehiculo);
+  }, [nombreVehiculo]); //una funcion que se ejecuta cada que una variable cambia
 
-const TablaVehiculos = ({ listaVehiculos }) => {
-  useEffect(() => {
-    console.log("este es el listado de vehiculos en el componente de tabla", listaVehiculos);
-  }, [listaVehiculos]);
-  return (
-    <div className="tabla">
-      <h2>Todos los vehículos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre del vehículo</th>
-            <th>Marca del vehículo</th>
-            <th>Modelo del vehículo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listaVehiculos.map((vehiculo) => {
-            return (
-              <tr>
-                <td>{vehiculo.nombre}</td>
-                <td>{vehiculo.marca}</td>
-                <td>{vehiculo.modelo}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  )
-};
+  // useEffect(() => {
+  //   console.log("este es un use effect que se ejecuta SIEMPRE que cambia una variable");
+  //}); se explica solo para que sepan que existe, pero no se debe usar. 
 
-const FormularioCreacionVehiculos = () => {
+ const enviarDatosAlBackend = ()=>{
+   console.log("El valor de la variable nombreVehiculo es ", nombreVehiculo);
+ }
+
   return (
-    <div>
-      <h2>Crear nuevo vehículo</h2>
-      <form className="crear-vehiculo">
-        <label className="nombre-vehiculo" htmlFor="nombre">
-          Nombre del vehículo
-          <input 
-            name="nombre"
-            className="columna-guardar" 
-            type="text" 
-            placeholder="Corolla" 
-          />
-        </label>
-        <label className="marca-vehiculo"htmlFor="marca">
-          Marca del vehículo
-          <select name="marca">
-            <option disabled>Seleccione una opcion</option>
-            <option>Renault</option>
-            <option>Toyota</option>
-            <option>Ford</option>
-            <option>Mazda</option>
-            <option>Chevrolet</option>
-          </select>
-        </label>
-        <label className="modelo-vehiculo" htmlFor="modelo">
-          modelo del vehículo
-          <input 
-            name="modelo"
-            className="columna-guardar" 
-            type="number" 
-            placeholder="2014" 
-            min={1992}
-            max={2022}
-          />
-        </label>
-        <button className="boton-guardar">Guardar vehiculo</button>
-      </form>
-    </div>
+    <form className='flex flex-col'>
+      <h2>Formulario de Creación de vehículos</h2>
+      <input 
+        onChange={(e)=> {
+          setNombreVehiculo(e.target.value);
+        }} 
+        type="text"
+        placeholder="Nombre del vehículo"
+      />
+      <input 
+        onChange={(e)=> {
+          console.log(e.target.value);
+        }}      
+        type="text" 
+        placeholder="Marca del vehículo"
+      />
+      <input type="text" placeholder="Modelo del vehículo"/>
+      <button type="button" onClick={enviarDatosAlBackend} className='bg-indigo-500 text-white'>Enviar Datos</button>
+    </form>
   );
-};
+};    //funciones que se ejecutan cada que yo hago cambios en un input o cada que le hago click a un buton
 
 export default Vehiculos;
-
-//``
