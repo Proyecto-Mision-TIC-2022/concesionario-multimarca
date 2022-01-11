@@ -124,18 +124,22 @@ const FromularioCreacionVehiculos = ({
   listaVehiculos, 
   funcionParaAgregarUnVehiculo, 
 }) => {
-  const [nombre, setNombre] = useState();
-  const [marca, setMarca] = useState();
-  const [modelo, setModelo] = useState();
+  const [nombre, setNombre] = useState("");
+  const [marca, setMarca] = useState("");
+  const [modelo, setModelo] = useState("");
 
   const enviarAlBackend = ()=>{
     console.log("nombre", nombre, "marca", marca, "modelo", modelo);
-    toast.success("Vehículo creado con éxito");
-    funcionParaMostrarLaTabla(true);
-    funcionParaAgregarUnVehiculo([
-      ...listaVehiculos,
-      {nombre: nombre, marca: marca, modelo: modelo}, 
-    ]);
+    if (nombre === "" || marca === "" || modelo === "" ) {
+      toast.error("Ingrese todas las informaciones");
+    } else {
+      toast.success("Vehículo creado con éxito");
+      funcionParaMostrarLaTabla(true);
+      funcionParaAgregarUnVehiculo([
+        ...listaVehiculos,
+        { nombre: nombre, marca: marca, modelo: modelo }, 
+      ]);
+    }
   };
 
   return (
@@ -153,6 +157,7 @@ const FromularioCreacionVehiculos = ({
             onChange={(e) => {
               setNombre(e.target.value);
             }}
+            required
           />
         </label>
         <label className='flex flex-col' htmlFor='marca'>
@@ -164,6 +169,7 @@ const FromularioCreacionVehiculos = ({
              }}           
              name='marca' 
              className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2' 
+             required
           >
              <option disabled>Seleccion una opción</option>
              <option>Renault</option>
@@ -186,10 +192,11 @@ const FromularioCreacionVehiculos = ({
             onChange={(e) => {
               setModelo(e.target.value);
             }}
+            required
           />
         </label>
         <button 
-          type='button'
+          type='submit'
           className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
           onClick={()=>{
             enviarAlBackend();
