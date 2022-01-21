@@ -9,49 +9,62 @@ import Login from "./pages/auth/Login";
 import Registro from "./pages/auth/Registro";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../src/styles/styles.css";
+import {DarkModeContext} from "./context/darkMode";
+import { useEffect, useState } from "react/cjs/react.development";
+
+
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path={["/admin", "/admin/vehiculos", "/admin/clientes"]}>
-          <PrivateLayout>
+  const [darkMode, setDarkMode] = useState(false);
+    useEffect (() => {
+      console.log("modo dark:" ,darkMode);
+    }, [darkMode]);
+    
+    return (
+      <div className="App">
+        <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+          <Router>
             <Switch>
-              <Route path="/admin/vehiculos">
-                <Vehiculos />
+              <Route path={["/admin", "/admin/vehiculos", "/admin/clientes"]}>
+                <PrivateLayout>
+                  <Switch>
+                    <Route path="/admin/vehiculos">
+                      <Vehiculos />
+                    </Route>
+                    <Route path="/admin/clientes">
+                      <Clientes />
+                    </Route>
+                    <Route path="/admin">
+                      <Admin />
+                    </Route>
+                  </Switch>
+                </PrivateLayout>
               </Route>
-              <Route path="/admin/clientes">
-                <Clientes />
+              <Route path={["/login", "/registro"]}>
+                <AuthLayout>
+                  <Switch>
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                    <Route path="/registro">  
+                      <Registro />
+                    </Route>
+                  </Switch>
+                </AuthLayout>
               </Route>
-              <Route path="/admin">
-                <Admin />
+              <Route path={["/"]}>
+                <PublicLayout>
+                  <Switch>
+                    <Route path="/">
+                      <Index />
+                    </Route>
+                  </Switch>
+                </PublicLayout>
               </Route>
             </Switch>
-          </PrivateLayout>
-        </Route>
-        <Route path={["/login", "/registro"]}>
-          <AuthLayout>
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/registro">  
-                <Registro />
-              </Route>
-            </Switch>
-          </AuthLayout>
-        </Route>
-        <Route path={["/"]}>
-          <PublicLayout>
-            <Switch>
-              <Route path="/">
-                <Index />
-              </Route>
-            </Switch>
-          </PublicLayout>
-        </Route>
-      </Switch>
-    </Router>
- );
+          </Router>
+        </DarkModeContext.Provider>
+     </div>
+  );
 }
 export default App;
