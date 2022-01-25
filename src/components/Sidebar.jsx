@@ -4,18 +4,19 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <nav className="w-72 border border-gray-300 h-full flex flex-col bg-gray-200 p-4">
-      <Link to="/admin">
-        <ImagenLogo />
-      </Link>
-      <div className='my-4'>
-        <Ruta icono="fas fa-user" ruta="/admin/perfil" nombre="Perfil" />
-        <Ruta icono="fas fa-car" ruta="/admin/vehiculos" nombre="Vehículos" />
-        <Ruta icono="fas fa-cash-register" ruta="/admin/ventas" nombre="Ventas" />
-        <Ruta icono="fas fa-user" ruta="/admin/usuarios" nombre="Usuarios" />
-      </div>
-      <button>Cerrar Sesión</button>
-    </nav>
+      <nav className="hidden sm:flex sm:w-72 border border-gray-300 h-full flex-col bg-gray-200 p-4">
+        <Link to="/admin">
+          <ImagenLogo />
+        </Link>
+
+        <div className='my-4'>
+          <Ruta icono="fas fa-user" ruta="/admin/perfil" nombre="Perfil" />
+          <Ruta icono="fas fa-car" ruta="/admin/vehiculos" nombre="Vehículos" />
+          <Ruta icono="fas fa-cash-register" ruta="/admin/ventas" nombre="Ventas" />
+          <Ruta icono="fas fa-user" ruta="/admin/usuarios" nombre="Usuarios" />
+        </div>
+        <button>Cerrar Sesión</button>
+      </nav>
   );
 };
 
